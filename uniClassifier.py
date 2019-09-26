@@ -36,7 +36,7 @@ def predict(tokens):
 
 
 dic_unigram = {}
-reader = open("./Unigram.txt")
+reader = open("./vocabulary/Unigram.txt")
 line = reader.readline()
 while line != "":
     data = line.split(" ")
@@ -47,7 +47,7 @@ reader.close()
 n_pos = 55746
 n_neg = 51857
 vocabulary = 670
-k = 10
+k = 1
 
 for key in dic_unigram:
     dic_unigram[key].prob_pos = (dic_unigram[key].count_pos + k) / (n_pos + k * vocabulary)

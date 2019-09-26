@@ -81,6 +81,7 @@ def get_grams(tokens, unigram, bigram, trigram, is_pos):
 
     return unigram, bigram, trigram
 
+
 spacy_nlp = spacy.load("en_core_web_sm")
 
 files_pos = glob.glob('./movies/train/P*.txt')
