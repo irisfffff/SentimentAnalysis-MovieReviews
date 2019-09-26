@@ -18,6 +18,7 @@ def get_tokens(file):
     doc = open(file, "r")
     doc_tokens = []
     contents = spacy_nlp(doc.read())
+    doc.close()
     for token in contents:
         if re.search("[a-zA-Z0-9]", token.text):
             doc_tokens.append(token.text.lower())
@@ -46,14 +47,14 @@ reader.close()
 n_pos = 55746
 n_neg = 51857
 vocabulary = 670
-k = 11
+k = 10
 
 for key in dic_unigram:
     dic_unigram[key].prob_pos = (dic_unigram[key].count_pos + k) / (n_pos + k * vocabulary)
     dic_unigram[key].prob_neg = (dic_unigram[key].count_neg + k) / (n_neg + k * vocabulary)
 
 spacy_nlp = spacy.load("en_core_web_sm")
-output = open("./prediction/Unigram11.txt", "w+")
+output = open(F"./prediction/Unigram{k}.txt", "w+")
 test_files = glob.glob("./movies/test/*.txt")
 for test_file in test_files:
     output.write("%s\t%s\n" % (os.path.splitext(test_file)[0].split("/")[3], predict(get_tokens(test_file))))
